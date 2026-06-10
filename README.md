@@ -161,7 +161,7 @@ Make sure the following are installed on your machine before running the project
 ### 1. Clone or download the project
 
 ```bash
-git clone https://github.com/your-username/todo-app.git
+git clone https://github.com/soufianeb7/java-miniprojt-todoapp.git
 cd todo-app
 ```
 
@@ -217,8 +217,8 @@ Update the constants to match your MySQL setup:
 private static final String HOST     = "localhost";
 private static final String PORT     = "3306";
 private static final String DATABASE = "todoapp_db";
-private static final String USERNAME = "root";           // change if needed
-private static final String PASSWORD = "your_password";  // change to yours
+private static final String USERNAME = "root";           
+private static final String PASSWORD = "your_password";  
 ```
 
 ---
@@ -349,14 +349,12 @@ The SQL script creates a default admin account:
 
 ## Author
 
-| Field | Value |
-|---|---|
-| **Student** | [Your Full Name] |
-| **Student ID** | [XXXXXXX] |
-| **University** | [University Name] |
-| **Course** | Java Programming — Final Project |
-| **Academic Year** | 2025 / 2026 |
-| **Supervisor** | [Professor Name] |
+| Field | Value                           |
+|---|---------------------------------|
+| **Student** | soufiane bouhasni               |
+| **University** | supMTI                          |
+| **Course** | Java Programming — mini-project |
+| **Academic Year** | 2025 / 2026                     |
 
 ---
 
