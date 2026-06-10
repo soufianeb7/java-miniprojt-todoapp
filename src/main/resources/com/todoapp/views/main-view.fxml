@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.todoapp.controllers.TaskController"
+            prefWidth="1000" prefHeight="680"
+            stylesheets="@../css/style.css">
+
+    <!-- ═══════════════════════════════════════════════════════
+         TOP — App title bar
+    ═══════════════════════════════════════════════════════ -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="12">
+            <Label text="📋 To-Do List Manager" styleClass="header-title"/>
+
+            <!-- Spacer — pousse les elements suivants vers la droite -->
+            <HBox HBox.hgrow="ALWAYS"/>
+
+
+            <!-- Bouton Admin — visible uniquement pour les admins (géré par le contrôleur) -->
+            <Button fx:id="btnAdminPanel" text="⚙  Admin Panel"
+                    styleClass="btn-admin" onAction="#handleOpenAdmin"
+                    visible="false"/>
+            <!-- Nom de l'utilisateur connecte -->
+            <Label fx:id="lblWelcome" text="" styleClass="header-user"/>
+
+
+            <!-- Bouton Logout -->
+            <Button text="⏻  Logout" styleClass="btn-logout" onAction="#handleLogout"/>
+        </HBox>
+    </top>
+
+    <!-- ═══════════════════════════════════════════════════════
+         CENTER — Dashboard cards + Table + Search/Filter
+    ═══════════════════════════════════════════════════════ -->
+    <center>
+        <VBox spacing="12">
+            <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
+
+            <!-- Dashboard Cards -->
+            <HBox spacing="12" styleClass="dashboard">
+                <VBox styleClass="card"
+                      style="-fx-background-color: #3498db; -fx-background-radius: 10;">
+                    <Label text="Total"      styleClass="card-label"/>
+                    <Label fx:id="lblTotal"  text="0" styleClass="card-number"/>
+                </VBox>
+                <VBox styleClass="card"
+                      style="-fx-background-color: #27ae60; -fx-background-radius: 10;">
+                    <Label text="Completed"      styleClass="card-label"/>
+                    <Label fx:id="lblCompleted"  text="0" styleClass="card-number"/>
+                </VBox>
+                <VBox styleClass="card"
+                      style="-fx-background-color: #e67e22; -fx-background-radius: 10;">
+                    <Label text="Pending"      styleClass="card-label"/>
+                    <Label fx:id="lblPending"  text="0" styleClass="card-number"/>
+                </VBox>
+                <VBox styleClass="card"
+                      style="-fx-background-color: #8e44ad; -fx-background-radius: 10;">
+                    <Label text="In Progress"      styleClass="card-label"/>
+                    <Label fx:id="lblInProgress"   text="0" styleClass="card-number"/>
+                </VBox>
+            </HBox>
+
+            <!-- Search and Filter Bar -->
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <TextField fx:id="txtSearch" promptText="🔍  Search tasks by title..."
+                           styleClass="search-field" prefWidth="300"
+                           onKeyReleased="#handleSearch"/>
+                <ComboBox fx:id="cmbFilterStatus" promptText="Filter by Status"
+                          styleClass="filter-combo" prefWidth="160"
+                          onAction="#handleFilter"/>
+                <ComboBox fx:id="cmbFilterPriority" promptText="Filter by Priority"
+                          styleClass="filter-combo" prefWidth="160"
+                          onAction="#handleFilter"/>
+                <Button text="Clear Filters" styleClass="btn-secondary"
+                        onAction="#handleClearFilters"/>
+            </HBox>
+
+            <!-- Task Table -->
+            <TableView fx:id="taskTable" VBox.vgrow="ALWAYS" styleClass="task-table">
+                <columns>
+                    <TableColumn fx:id="colId"       text="ID"          prefWidth="45"/>
+                    <TableColumn fx:id="colTitle"    text="Title"       prefWidth="220"/>
+                    <TableColumn fx:id="colPriority" text="Priority"    prefWidth="90"/>
+                    <TableColumn fx:id="colStatus"   text="Status"      prefWidth="110"/>
+                    <TableColumn fx:id="colDueDate"  text="Due Date"    prefWidth="100"/>
+                    <TableColumn fx:id="colCategory" text="Category"    prefWidth="100"/>
+                    <TableColumn fx:id="colCreated"  text="Created"     prefWidth="130"/>
+                </columns>
+                <placeholder>
+                    <Label text="No tasks found. Add your first task →" styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+
+            <!-- Action Buttons -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="✔  Mark Completed" styleClass="btn-success"
+                        onAction="#handleMarkCompleted"/>
+                <Button text="✎  Edit Task"      styleClass="btn-warning"
+                        onAction="#handleEditTask"/>
+                <Button text="✖  Delete Task"    styleClass="btn-danger"
+                        onAction="#handleDeleteTask"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- ═══════════════════════════════════════════════════════
+         RIGHT — Add / Edit Task Form
+    ═══════════════════════════════════════════════════════ -->
+    <right>
+        <VBox spacing="12" styleClass="form-panel" prefWidth="270">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+            <Label fx:id="lblFormTitle" text="Add New Task" styleClass="form-title"/>
+            <Separator/>
+
+            <Label text="Title *" styleClass="form-label"/>
+            <TextField fx:id="txtTitle" promptText="Task title" styleClass="form-field"/>
+
+            <Label text="Description" styleClass="form-label"/>
+            <TextArea fx:id="txtDescription" promptText="Optional details..."
+                      prefRowCount="3" wrapText="true" styleClass="form-field"/>
+
+            <Label text="Priority" styleClass="form-label"/>
+            <ComboBox fx:id="cmbPriority" prefWidth="238" styleClass="form-field"/>
+
+            <Label text="Status" styleClass="form-label"/>
+            <ComboBox fx:id="cmbStatus" prefWidth="238" styleClass="form-field"/>
+
+            <Label text="Due Date" styleClass="form-label"/>
+            <DatePicker fx:id="dateDueDate" prefWidth="238" styleClass="form-field"/>
+
+            <Label text="Category" styleClass="form-label"/>
+            <ComboBox fx:id="cmbCategory" prefWidth="238" editable="true" styleClass="form-field"/>
+
+            <Separator/>
+
+            <HBox spacing="8">
+                <Button fx:id="btnSave"  text="💾  Save Task"
+                        styleClass="btn-primary" prefWidth="115"
+                        onAction="#handleSaveTask"/>
+                <Button text="✖  Clear"
+                        styleClass="btn-secondary" prefWidth="115"
+                        onAction="#handleClearForm"/>
+            </HBox>
+
+        </VBox>
+    </right>
+
+</BorderPane>

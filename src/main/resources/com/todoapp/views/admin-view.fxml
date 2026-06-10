@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.todoapp.controllers.AdminController"
+            prefWidth="900" prefHeight="600"
+            stylesheets="@../css/style.css">
+
+    <!-- HEADER -->
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="12">
+            <Label text="⚙  Admin Panel — Gestion des Utilisateurs"
+                   styleClass="header-title"/>
+            <HBox HBox.hgrow="ALWAYS"/>
+            <Button text="◀  Retour à l'application"
+                    styleClass="btn-secondary"
+                    onAction="#handleBack"/>
+        </HBox>
+    </top>
+
+    <!-- CENTER : tableau des utilisateurs -->
+    <center>
+        <VBox spacing="12">
+            <padding><Insets top="16" right="16" bottom="12" left="16"/></padding>
+
+            <!-- Cartes stats -->
+            <HBox spacing="12">
+                <VBox styleClass="card"
+                      style="-fx-background-color: #2c3e50; -fx-background-radius: 10;">
+                    <Label text="Total Utilisateurs" styleClass="card-label"/>
+                    <Label fx:id="lblTotalUsers" text="0" styleClass="card-number"/>
+                </VBox>
+                <VBox styleClass="card"
+                      style="-fx-background-color: #27ae60; -fx-background-radius: 10;">
+                    <Label text="Admins" styleClass="card-label"/>
+                    <Label fx:id="lblTotalAdmins" text="0" styleClass="card-number"/>
+                </VBox>
+                <VBox styleClass="card"
+                      style="-fx-background-color: #3498db; -fx-background-radius: 10;">
+                    <Label text="Utilisateurs" styleClass="card-label"/>
+                    <Label fx:id="lblTotalRegular" text="0" styleClass="card-number"/>
+                </VBox>
+            </HBox>
+
+            <!-- Tableau des utilisateurs -->
+            <TableView fx:id="userTable" VBox.vgrow="ALWAYS" styleClass="task-table">
+                <columns>
+                    <TableColumn fx:id="colUserId"       text="ID"         prefWidth="50"/>
+                    <TableColumn fx:id="colUsername"     text="Username"   prefWidth="180"/>
+                    <TableColumn fx:id="colFullName"     text="Nom Complet" prefWidth="200"/>
+                    <TableColumn fx:id="colRole"         text="Rôle"       prefWidth="100"/>
+                    <TableColumn fx:id="colCreatedAt"    text="Créé le"    prefWidth="160"/>
+                    <TableColumn fx:id="colTaskCount"    text="Tâches"     prefWidth="80"/>
+                </columns>
+                <placeholder>
+                    <Label text="Aucun utilisateur trouvé." styleClass="table-placeholder"/>
+                </placeholder>
+            </TableView>
+
+            <!-- Boutons d'action -->
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="🔄  Promouvoir Admin"
+                        styleClass="btn-warning"
+                        onAction="#handlePromoteUser"/>
+                <Button text="⬇  Rétrograder Utilisateur"
+                        styleClass="btn-secondary"
+                        onAction="#handleDemoteUser"/>
+                <Button text="✖  Supprimer l'utilisateur"
+                        styleClass="btn-danger"
+                        onAction="#handleDeleteUser"/>
+            </HBox>
+
+        </VBox>
+    </center>
+
+    <!-- RIGHT : formulaire création utilisateur par admin -->
+    <right>
+        <VBox spacing="12" styleClass="form-panel" prefWidth="260">
+            <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
+
+            <Label text="Créer un Utilisateur" styleClass="form-title"/>
+            <Separator/>
+
+            <Label text="Nom Complet" styleClass="form-label"/>
+            <TextField fx:id="txtNewFullName" promptText="Nom complet"
+                       styleClass="auth-field"/>
+
+            <Label text="Username" styleClass="form-label"/>
+            <TextField fx:id="txtNewUsername" promptText="Nom d'utilisateur"
+                       styleClass="auth-field"/>
+
+            <Label text="Mot de passe" styleClass="form-label"/>
+            <PasswordField fx:id="txtNewPassword" promptText="Mot de passe"
+                           styleClass="auth-field"/>
+
+            <Label text="Rôle" styleClass="form-label"/>
+            <ComboBox fx:id="cmbNewRole" prefWidth="228" styleClass="form-field"/>
+
+            <Label fx:id="lblAdminError" text="" styleClass="auth-error"
+                   wrapText="true"/>
+
+            <Button text="➕  Créer l'utilisateur"
+                    styleClass="btn-primary" prefWidth="228"
+                    onAction="#handleCreateUser"/>
+
+            <Button text="✖  Effacer"
+                    styleClass="btn-secondary" prefWidth="228"
+                    onAction="#handleClearAdminForm"/>
+
+        </VBox>
+    </right>
+
+</BorderPane>

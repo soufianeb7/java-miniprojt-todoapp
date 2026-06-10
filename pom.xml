@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Fichier: pom.xml
+
+  Description (FR):
+  Ce fichier Maven décrit la configuration du projet Java "todo-app".
+  Il définit les coordonnées du projet (groupId, artifactId, version),
+  les propriétés de compilation (Java 21, encodage), les dépendances (JavaFX,
+  driver MySQL, JUnit pour les tests) et les plugins de build (plugin JavaFX
+  pour l'exécution, compilateur Maven, plugin Surefire pour les tests).
+
+  Utilisation rapide:
+  - Compiler : mvn clean package
+  - Lancer l'application JavaFX (via le plugin OpenJFX) : mvn javafx:run
+  - Exécuter les tests : mvn test
+
+  Remarques:
+  - Le projet cible Java 21 (voir les propriétés et la configuration du plugin maven-compiler-plugin).
+  - La variable ${javafx.version} centralise la version de JavaFX utilisée.
+  - Les dépendances de JavaFX sont ajoutées explicitement pour javafx-controls et javafx-fxml.
+  - Le driver MySQL est nécessaire pour la connexion à la base de données (mysql-connector-j).
+  - JUnit 5 est configuré en scope "test" pour les dépendances de test.
+-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Version du modèle POM -->
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <groupId>SupMti-java-miniproject</groupId>
+    <artifactId>todo-app</artifactId>
+    <version>1.0</version>
+    <packaging>jar</packaging>
+
+    <!-- Propriétés globales réutilisables dans le POM -->
+    <properties>
+        <!--
+          Versions du compilateur Java ciblées.
+          Ici on déclare Java 21 ; le plugin de compilation utilisera ces valeurs.
+        -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+
+        <!-- Encodage des sources -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- Version centralisée de JavaFX utilisée par les dépendances -->
+        <javafx.version>23.0.1</javafx.version>
+    </properties>
+
+    <dependencies>
+
+        <!--
+          JavaFX Controls :
+          Fournit les composants UI standard (TableView, Button, ComboBox, etc.)
+          Nécessaire pour construire l'interface JavaFX.
+        -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!--
+          JavaFX FXML :
+          Permet le chargement et l'utilisation de fichiers .fxml (définition des vues).
+        -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!--
+          MySQL JDBC Driver :
+          Permet la connexion JDBC vers une base de données MySQL/MariaDB.
+          La classe de connexion du projet (DatabaseConnection) s'appuie sur ce driver.
+        -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.todoapp.MainApp</mainClass>
+                </configuration>
+            </plugin>
+
+            <!--
+              Maven Compiler Plugin :
+              Configure le compilateur Java (source et target).
+              Ici on cible Java 21 explicitement.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>21</source>
+                    <target>21</target>
+                </configuration>
+            </plugin>
+
+            <!--
+              Maven Surefire Plugin :
+              Responsable de l'exécution des tests unitaires (mvn test).
+              La version est spécifiée pour s'assurer d'un comportement attendu avec JUnit 5.
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
