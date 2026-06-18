@@ -1,13 +1,26 @@
 -- ============================================================
---  To-Do List Application — Database Script
---  Database : todoapp_db
---  Author   : Soufiane bouhasni
---  Date     : 2026
+--  APPLICATION DE GESTION DE TÂCHES — SCRIPT DE BASE DE DONNÉES
+--  Base de données : todoapp_db
+--  Auteur : Soufiane bouhasni
+--  Date : 2026
 --
 --  Description:
---  This SQL script sets up the database schema for a JavaFX-based
---  To-Do List application. It includes tables for tasks and users,
---  with support for user authentication and role-based access control.
+--  Ce script SQL configure le schéma de base de données pour une
+--  application JavaFX de gestion de liste de tâches. Il inclut des
+--  tables pour les tâches et les utilisateurs, avec support pour
+--  l'authentification utilisateur et le contrôle d'accès basé sur
+--  les rôles (RBAC - Role-Based Access Control).
+--
+--  Fonctionnalités principales:
+--    • Gestion multi-utilisateur (chaque tâche appartient à un utilisateur)
+--    • Authentification utilisateur avec stockage sécurisé des mots de passe
+--    • Système de rôles (USER : utilisateur standard, ADMIN : administrateur)
+--    • Support complet des opérations CRUD (Créer, Lire, Mettre à jour, Supprimer)
+--    • Intégrité référentielle avec cascade de suppression (ON DELETE CASCADE)
+--
+--  Tables créées:
+--    1. tasks : Stocke toutes les tâches avec leurs propriétés
+--    2. users : Stocke les comptes utilisateur et les informations d'authentification
 -- ============================================================
 
 CREATE DATABASE IF NOT EXISTS todoapp_db
@@ -56,7 +69,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 
 -- ============================================================
---  SCHEMA MODIFICATIONS FOR AUTHENTICATION & AUTHORIZATION
+--  MODIFICATIONS DE SCHÉMA POUR L'AUTHENTIFICATION & AUTORISATION
 --
 --  NOTE: Les modifications suivantes au schéma de la base de données
 --  ont été ajoutées après la création initiale des tables. Ces modifications
