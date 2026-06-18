@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- Vue d'inscription de l'application. -->
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.todoapp.controllers.RegisterController"
@@ -12,6 +13,7 @@
       stylesheets="@../css/style.css"
       styleClass="auth-root">
 
+    <!-- En-tête de la page avec le titre et le sous-titre. -->
     <VBox alignment="CENTER" spacing="6" styleClass="auth-header">
         <padding><Insets top="30" bottom="20"/></padding>
         <Label text="📋" style="-fx-font-size: 40px;"/>
@@ -19,31 +21,39 @@
         <Label text="Join To-Do List Manager" styleClass="auth-subtitle"/>
     </VBox>
 
+    <!-- Carte contenant le formulaire d'inscription. -->
     <VBox styleClass="auth-card" spacing="12" alignment="CENTER">
         <padding><Insets top="24" right="40" bottom="24" left="40"/></padding>
 
+        <!-- Champ du nom complet. -->
         <Label text="Full Name" styleClass="form-label" maxWidth="340"/>
         <TextField fx:id="txtFullName" promptText="Your full name"
                    styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Champ du nom d'utilisateur. -->
         <Label text="Username" styleClass="form-label" maxWidth="340"/>
         <TextField fx:id="txtUsername" promptText="Choose a username"
                    styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Champ du mot de passe. -->
         <Label text="Password" styleClass="form-label" maxWidth="340"/>
         <PasswordField fx:id="txtPassword" promptText="Choose a password"
                        styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Champ de confirmation du mot de passe. -->
         <Label text="Confirm Password" styleClass="form-label" maxWidth="340"/>
         <PasswordField fx:id="txtConfirm" promptText="Repeat your password"
                        styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Zone d'affichage des messages d'erreur de validation. -->
         <Label fx:id="lblError" text="" styleClass="auth-error"
                maxWidth="340" wrapText="true"/>
 
+        <!-- Bouton de création du compte. -->
         <Button text="Create Account" onAction="#handleRegister"
                 styleClass="btn-primary auth-btn" maxWidth="340"/>
 
+        <!-- Lien de retour vers l'écran de connexion. -->
         <HBox alignment="CENTER" spacing="6">
             <Label text="Already have an account?" styleClass="auth-link-text"/>
             <Button text="Login" onAction="#handleGoToLogin"

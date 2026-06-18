@@ -8,10 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Entry point for the To-Do List JavaFX application.
- * Loads the main FXML view and launches the primary window.
- */
 public class MainApp extends Application {
 
     @Override

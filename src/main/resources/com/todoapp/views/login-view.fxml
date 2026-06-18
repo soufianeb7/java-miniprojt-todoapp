@@ -4,6 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- Vue d'authentification : écran de connexion de l'application -->
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.todoapp.controllers.LoginController"
@@ -12,7 +13,7 @@
       stylesheets="@../css/style.css"
       styleClass="auth-root">
 
-    <!-- Logo / Title area -->
+    <!-- En-tête : logo, nom de l'application et sous-titre -->
     <VBox alignment="CENTER" spacing="6" styleClass="auth-header">
         <padding><Insets top="40" bottom="30"/></padding>
         <Label text="📋" style="-fx-font-size: 48px;"/>
@@ -20,26 +21,32 @@
         <Label text="Sign in to your account" styleClass="auth-subtitle"/>
     </VBox>
 
-    <!-- Login card -->
+    <!-- Carte principale contenant le formulaire de connexion -->
     <VBox styleClass="auth-card" spacing="14" alignment="CENTER">
         <padding><Insets top="30" right="40" bottom="30" left="40"/></padding>
 
+        <!-- Champ du nom d'utilisateur -->
         <Label text="Username" styleClass="form-label" maxWidth="340"/>
         <TextField fx:id="txtUsername" promptText="Enter your username"
                    styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Champ du mot de passe -->
         <Label text="Password" styleClass="form-label" maxWidth="340"/>
         <PasswordField fx:id="txtPassword" promptText="Enter your password"
                        styleClass="auth-field" maxWidth="340"/>
 
+        <!-- Message d'erreur affiché en cas d'échec de connexion -->
         <Label fx:id="lblError" text="" styleClass="auth-error"
                maxWidth="340" wrapText="true"/>
 
+        <!-- Bouton de validation de la connexion -->
         <Button text="Login" onAction="#handleLogin"
                 styleClass="btn-primary auth-btn" maxWidth="340"/>
 
+        <!-- Séparateur visuel entre la connexion et l'inscription -->
         <Separator maxWidth="340"/>
 
+        <!-- Lien vers l'écran d'inscription -->
         <HBox alignment="CENTER" spacing="6">
             <Label text="No account yet?" styleClass="auth-link-text"/>
             <Button text="Register here" onAction="#handleGoToRegister"

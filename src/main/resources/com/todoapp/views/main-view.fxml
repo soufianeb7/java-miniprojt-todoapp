@@ -5,44 +5,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
 
+<!-- Vue principale affichée après la connexion. -->
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.todoapp.controllers.TaskController"
             prefWidth="1000" prefHeight="680"
             stylesheets="@../css/style.css">
 
-    <!-- ═══════════════════════════════════════════════════════
-         TOP — App title bar
-    ═══════════════════════════════════════════════════════ -->
+    <!-- Barre supérieure de l'application avec le titre et les actions globales. -->
     <top>
         <HBox styleClass="header" alignment="CENTER_LEFT" spacing="12">
             <Label text="📋 To-Do List Manager" styleClass="header-title"/>
 
-            <!-- Spacer — pousse les elements suivants vers la droite -->
+            <!-- Espace flexible pour pousser les éléments suivants vers la droite. -->
             <HBox HBox.hgrow="ALWAYS"/>
-
-
-            <!-- Bouton Admin — visible uniquement pour les admins (géré par le contrôleur) -->
+            <!-- Bouton d'administration visible uniquement pour les administrateurs. -->
             <Button fx:id="btnAdminPanel" text="⚙  Admin Panel"
                     styleClass="btn-admin" onAction="#handleOpenAdmin"
                     visible="false"/>
-            <!-- Nom de l'utilisateur connecte -->
+            <!-- Nom de l'utilisateur connecté. -->
             <Label fx:id="lblWelcome" text="" styleClass="header-user"/>
-
-
-            <!-- Bouton Logout -->
+            <!-- Bouton de déconnexion. -->
             <Button text="⏻  Logout" styleClass="btn-logout" onAction="#handleLogout"/>
         </HBox>
     </top>
 
-    <!-- ═══════════════════════════════════════════════════════
-         CENTER — Dashboard cards + Table + Search/Filter
-    ═══════════════════════════════════════════════════════ -->
+    <!-- Zone centrale : indicateurs, recherche, filtres et tableau des tâches. -->
     <center>
         <VBox spacing="12">
             <padding><Insets top="12" right="16" bottom="12" left="16"/></padding>
 
-            <!-- Dashboard Cards -->
+            <!-- Cartes du tableau de bord affichant les statistiques. -->
             <HBox spacing="12" styleClass="dashboard">
                 <VBox styleClass="card"
                       style="-fx-background-color: #3498db; -fx-background-radius: 10;">
@@ -66,7 +59,7 @@
                 </VBox>
             </HBox>
 
-            <!-- Search and Filter Bar -->
+            <!-- Barre de recherche et de filtrage des tâches. -->
             <HBox spacing="10" alignment="CENTER_LEFT">
                 <TextField fx:id="txtSearch" promptText="🔍  Search tasks by title..."
                            styleClass="search-field" prefWidth="300"
@@ -81,7 +74,7 @@
                         onAction="#handleClearFilters"/>
             </HBox>
 
-            <!-- Task Table -->
+            <!-- Tableau contenant la liste des tâches. -->
             <TableView fx:id="taskTable" VBox.vgrow="ALWAYS" styleClass="task-table">
                 <columns>
                     <TableColumn fx:id="colId"       text="ID"          prefWidth="45"/>
@@ -97,7 +90,7 @@
                 </placeholder>
             </TableView>
 
-            <!-- Action Buttons -->
+            <!-- Boutons d'action sur la tâche sélectionnée. -->
             <HBox spacing="10" alignment="CENTER_RIGHT">
                 <Button text="✔  Mark Completed" styleClass="btn-success"
                         onAction="#handleMarkCompleted"/>
@@ -110,37 +103,43 @@
         </VBox>
     </center>
 
-    <!-- ═══════════════════════════════════════════════════════
-         RIGHT — Add / Edit Task Form
-    ═══════════════════════════════════════════════════════ -->
+    <!-- Panneau droit : formulaire d'ajout ou de modification d'une tâche. -->
     <right>
         <VBox spacing="12" styleClass="form-panel" prefWidth="270">
             <padding><Insets top="16" right="16" bottom="16" left="16"/></padding>
 
+            <!-- Titre du formulaire. -->
             <Label fx:id="lblFormTitle" text="Add New Task" styleClass="form-title"/>
             <Separator/>
 
+            <!-- Champ du titre de la tâche. -->
             <Label text="Title *" styleClass="form-label"/>
             <TextField fx:id="txtTitle" promptText="Task title" styleClass="form-field"/>
 
+            <!-- Champ de description de la tâche. -->
             <Label text="Description" styleClass="form-label"/>
             <TextArea fx:id="txtDescription" promptText="Optional details..."
                       prefRowCount="3" wrapText="true" styleClass="form-field"/>
 
+            <!-- Sélecteur de priorité. -->
             <Label text="Priority" styleClass="form-label"/>
             <ComboBox fx:id="cmbPriority" prefWidth="238" styleClass="form-field"/>
 
+            <!-- Sélecteur de statut. -->
             <Label text="Status" styleClass="form-label"/>
             <ComboBox fx:id="cmbStatus" prefWidth="238" styleClass="form-field"/>
 
+            <!-- Sélecteur de date d'échéance. -->
             <Label text="Due Date" styleClass="form-label"/>
             <DatePicker fx:id="dateDueDate" prefWidth="238" styleClass="form-field"/>
 
+            <!-- Sélecteur ou saisie de catégorie. -->
             <Label text="Category" styleClass="form-label"/>
             <ComboBox fx:id="cmbCategory" prefWidth="238" editable="true" styleClass="form-field"/>
 
             <Separator/>
 
+            <!-- Boutons pour enregistrer ou réinitialiser le formulaire. -->
             <HBox spacing="8">
                 <Button fx:id="btnSave"  text="💾  Save Task"
                         styleClass="btn-primary" prefWidth="115"

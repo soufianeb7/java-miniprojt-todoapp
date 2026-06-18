@@ -16,7 +16,6 @@ import java.util.List;
  */
 public class TaskDAO {
 
-    // ─── SQL ─────────────────────────────────────────────────────────────────
 
     private static final String INSERT_TASK =
             "INSERT INTO tasks (title, description, priority, status, due_date, category, user_id) " +
@@ -53,7 +52,6 @@ public class TaskDAO {
     private static final String COUNT_BY_STATUS =
             "SELECT COUNT(*) FROM tasks WHERE user_id=? AND status=?";
 
-    // ─── Helper ───────────────────────────────────────────────────────────────
 
     private Connection getConnection() throws SQLException {
         return DatabaseConnection.getInstance().getConnection();
